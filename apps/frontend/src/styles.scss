@@ -1,0 +1,5 @@
+@use '@angular/material' as mat;
+html { @include mat.theme((color: mat.$azure-palette, typography: Roboto, density: 0)); }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, Arial, sans-serif; color: var(--mat-sys-on-surface); background: var(--mat-sys-surface); }
+h1 { margin: 0 0 24px; font-size: clamp(1.75rem, 3vw, 2.25rem); }
