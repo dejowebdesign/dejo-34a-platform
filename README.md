@@ -45,6 +45,17 @@ docker compose up -d --build
 
 The frontend is served at `http://localhost:8080`, proxying `/api` to the backend. PostgreSQL data persists in the named `postgres_data` volume. View service logs with `docker compose logs -f` and stop services with `docker compose down`.
 
+## Umbrel OS / Portainer
+
+The root `docker-compose.yml` uses the Compose specification and is suitable for a Portainer **Docker Compose Stack** (not Docker Swarm). It builds the two application images from the Git repository and uses a named PostgreSQL volume.
+
+1. In Portainer, create a new Stack from this Git repository.
+2. Select `docker-compose.yml` as the compose path.
+3. Define `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `JWT_SECRET` as Stack environment variables. Use strong, unique secrets; do not commit them.
+4. Deploy the stack. The frontend publishes port `8080`; map or reverse-proxy that port through Umbrel as appropriate for the installation.
+
+All services use `restart: unless-stopped`. The backend applies committed Prisma migrations before it starts, so a database backup should be taken before deployments that include new migrations.
+
 ## Project structure
 
 ```text
