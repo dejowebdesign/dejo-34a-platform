@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { PlaceholderPageComponent } from './core/placeholder-page.component';
 import { DetailPageComponent } from './features/detail-page.component';
 import { LawsPageComponent } from './features/laws/laws-page.component';
+import { ImportDashboardComponent } from './features/imports/import-dashboard.component';
+import { ParagraphHistoryComponent } from './features/paragraphs/paragraph-history.component';
 import { ParagraphsPageComponent } from './features/paragraphs/paragraphs-page.component';
 import { TopicsPageComponent } from './features/topics/topics-page.component';
 
@@ -13,7 +15,9 @@ export const routes: Routes = [
   { path: 'laws', component: LawsPageComponent },
   { path: 'laws/:id', component: DetailPageComponent, data: { title: 'Gesetz' } },
   { path: 'paragraphs', component: ParagraphsPageComponent },
+  { path: 'paragraphs/:id/history', component: ParagraphHistoryComponent },
   { path: 'paragraphs/:id', component: DetailPageComponent, data: { title: 'Paragraph' } },
+  { path: 'imports', component: ImportDashboardComponent },
   { path: 'search', component: PlaceholderPageComponent, data: { title: 'Suche' } },
   { path: 'quiz', component: PlaceholderPageComponent, data: { title: 'Quiz' } },
   { path: 'presentations', component: PlaceholderPageComponent, data: { title: 'Präsentationen' } },

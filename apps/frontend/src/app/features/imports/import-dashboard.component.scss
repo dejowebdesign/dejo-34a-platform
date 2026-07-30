@@ -1,0 +1,8 @@
+.page-header h1 { margin-bottom: 6px; }
+.page-header p { margin: 0; color: var(--mat-sys-on-surface-variant); }
+.status-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0 32px; }
+.section { margin-top: 32px; }
+.table-wrapper { overflow-x: auto; border: 1px solid var(--mat-sys-outline-variant); border-radius: 12px; }
+table { width: 100%; }
+@media (max-width: 600px) { .status-grid { grid-template-columns: 1fr; } }
+

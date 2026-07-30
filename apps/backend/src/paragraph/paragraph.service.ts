@@ -14,7 +14,7 @@ export class ParagraphService {
   async update(id: string, data: UpdateParagraphDto) { await this.requireParagraph(id); return this.prisma.paragraph.update({ where: { id }, data }); }
   async remove(id: string) { await this.requireParagraph(id); return this.prisma.paragraph.delete({ where: { id } }); }
 
-  findAllVersions() { return this.prisma.paragraphVersion.findMany({ include: { paragraph: true }, orderBy: { importedAt: 'desc' } }); }
+  findAllVersions(paragraphId?: string) { return this.prisma.paragraphVersion.findMany({ where: paragraphId ? { paragraphId } : undefined, include: { paragraph: true }, orderBy: { importedAt: 'desc' } }); }
   async findOneVersion(id: string) { return this.requireVersion(id); }
   createVersion(data: CreateParagraphVersionDto) { return this.prisma.paragraphVersion.create({ data: { ...data, importedAt: data.importedAt ? new Date(data.importedAt) : undefined } }); }
   async updateVersion(id: string, data: UpdateParagraphVersionDto) {

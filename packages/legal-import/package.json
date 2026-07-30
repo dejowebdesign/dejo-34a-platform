@@ -1,0 +1,18 @@
+{
+  "name": "@dejo/legal-import",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "fast-xml-parser": "^5.2.5"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7"
+  }
+}

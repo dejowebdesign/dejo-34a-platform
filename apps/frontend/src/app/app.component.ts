@@ -21,6 +21,7 @@ export class AppComponent {
     { label: 'Themengebiete', icon: 'account_tree', route: '/topics' },
     { label: 'Gesetze', icon: 'gavel', route: '/laws' },
     { label: 'Paragraphen', icon: 'article', route: '/paragraphs' },
+    { label: 'Importe', icon: 'sync', route: '/imports' },
     { label: 'Suche', icon: 'search', route: '/search' },
     { label: 'Quiz', icon: 'quiz', route: '/quiz' },
     { label: 'Präsentationen', icon: 'slideshow', route: '/presentations' },

@@ -76,6 +76,9 @@ model Paragraph {
   title          String?
   currentText    String
   currentVersion String
+  currentChecksum String
+  sourceUrl      String
+  lastImportedAt DateTime
   law            Law                @relation(fields: [lawId], references: [id], onDelete: Cascade)
   subTopic       SubTopic?          @relation(fields: [subTopicId], references: [id], onDelete: SetNull)
   versions       ParagraphVersion[]
@@ -92,6 +95,8 @@ model ParagraphVersion {
   paragraphId String
   version     String
   text        String
+  checksum    String
+  sourceUrl   String
   importedAt  DateTime  @default(now())
   paragraph   Paragraph @relation(fields: [paragraphId], references: [id], onDelete: Cascade)
 
@@ -107,7 +112,11 @@ model ImportJob {
   status             ImportJobStatus @default(PENDING)
   importedParagraphs Int             @default(0)
   changedParagraphs  Int             @default(0)
+  deletedParagraphs  Int             @default(0)
+  duration           Int?
   message            String?
+  errors             Json?
+  warnings           Json?
   law                Law             @relation(fields: [lawId], references: [id], onDelete: Cascade)
 
   @@index([lawId])
