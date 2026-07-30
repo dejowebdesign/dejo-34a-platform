@@ -76,6 +76,25 @@ docs/             architecture documentation
 
 `Auth`, `Topic`, `Law`, `Paragraph`, `Import`, `Search`, and `Quiz` are independent NestJS modules. Each keeps HTTP handling and persistence logic separated so domain features can grow without cross-cutting dependencies.
 
+## Law Engine foundation
+
+The Law Engine provides a version-aware persistence and API foundation without bundled legal content or an automated importer. The data model connects topics and sub-topics to optional paragraph classifications; laws own paragraphs, paragraph versions, and import-job records.
+
+The REST API is available under `/api`; the OpenAPI document is served at `/api/docs`.
+
+| Resource | Endpoints |
+| --- | --- |
+| Topics | `/api/topics` |
+| Sub-topics | `/api/sub-topics` |
+| Laws | `/api/laws` |
+| Paragraphs | `/api/paragraphs` |
+| Paragraph versions | `/api/paragraph-versions` |
+| Import jobs | `/api/import-jobs` |
+
+Each resource provides `GET`, `GET /:id`, `POST`, `PATCH /:id`, and `DELETE /:id` endpoints. Import-job endpoints manage records only; they do not execute an importer.
+
+The Angular application includes empty, paginated Material table shells for topics, laws, and paragraphs. Sorting and local filtering are ready for API-backed data sources; detail routes are deliberately empty.
+
 ## Quality controls
 
 Prettier, ESLint, Husky/lint-staged, and GitHub Actions are configured at the repository root. CI validates formatting, linting, and builds on pushes to `main` and pull requests.
