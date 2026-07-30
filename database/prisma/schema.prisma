@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole { ADMIN INSTRUCTOR LEARNER }
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  passwordHash String
+  role      UserRole @default(LEARNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Topic {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  position  Int      @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quizzes   Quiz[]
+}
+
+model Law {
+  id        String      @id @default(cuid())
+  name      String
+  shortName String      @unique
+  sourceUrl String?
+  version   String?
+  paragraphs Paragraph[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Paragraph {
+  id        String   @id @default(cuid())
+  lawId     String
+  reference String
+  title     String?
+  content   String
+  law       Law      @relation(fields: [lawId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([lawId, reference])
+  @@index([lawId])
+}
+
+model Quiz {
+  id        String   @id @default(cuid())
+  title     String
+  topicId   String?
+  topic     Topic?   @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([topicId])
+}
