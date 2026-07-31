@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import type { JwtService } from '@nestjs/jwt';
 
-export interface AuthenticatedUser { id: string; email: string; role: string; }
+export interface AuthenticatedUser {
+  id: string;
+  email: string;
+  role: string;
+}
 
 @Injectable()
 export class AuthService {
@@ -12,4 +16,3 @@ export class AuthService {
     return this.jwtService.sign({ sub: user.id, email: user.email, role: user.role });
   }
 }
-

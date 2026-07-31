@@ -5,9 +5,22 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { catchError, forkJoin, map, of } from 'rxjs';
 
-interface LawRow { abbreviation: string; version: string | null; source: string | null; }
-interface ImportJobRow { startedAt: string; law: { abbreviation: string }; status: string; importedParagraphs: number; changedParagraphs: number; }
-interface ImportStatus { schedulerEnabled: boolean; jobs: ImportJobRow[]; }
+interface LawRow {
+  abbreviation: string;
+  version: string | null;
+  source: string | null;
+}
+interface ImportJobRow {
+  startedAt: string;
+  law: { abbreviation: string };
+  status: string;
+  importedParagraphs: number;
+  changedParagraphs: number;
+}
+interface ImportStatus {
+  schedulerEnabled: boolean;
+  jobs: ImportJobRow[];
+}
 
 @Component({
   imports: [AsyncPipe, MatCardModule, MatTableModule],
@@ -25,7 +38,19 @@ export class ImportDashboardComponent {
     history: this.http.get<ImportJobRow[]>('/api/import-jobs/history'),
     status: this.http.get<ImportStatus>('/api/import-jobs/status')
   }).pipe(
-    map((dashboard) => ({ ...dashboard, changed: dashboard.history.filter((job) => job.changedParagraphs > 0), changedCount: dashboard.history.reduce((sum, job) => sum + job.changedParagraphs, 0) })),
-    catchError(() => of({ laws: [], history: [], status: { schedulerEnabled: false, jobs: [] }, changed: [], changedCount: 0 }))
+    map((dashboard) => ({
+      ...dashboard,
+      changed: dashboard.history.filter((job) => job.changedParagraphs > 0),
+      changedCount: dashboard.history.reduce((sum, job) => sum + job.changedParagraphs, 0)
+    })),
+    catchError(() =>
+      of({
+        laws: [],
+        history: [],
+        status: { schedulerEnabled: false, jobs: [] },
+        changed: [],
+        changedCount: 0
+      })
+    )
   );
 }

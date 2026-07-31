@@ -6,7 +6,9 @@ export class ManualImportDto {
   @IsString()
   lawId!: string;
 
-  @ApiPropertyOptional({ description: 'Official Gesetze-im-Internet XML or XML ZIP URL. Defaults to the law source.' })
+  @ApiPropertyOptional({
+    description: 'Official Gesetze-im-Internet XML or XML ZIP URL. Defaults to the law source.'
+  })
   @IsOptional()
   @IsUrl()
   sourceUrl?: string;

@@ -82,14 +82,14 @@ The Law Engine provides a version-aware persistence and API foundation without b
 
 The REST API is available under `/api`; the OpenAPI document is served at `/api/docs`.
 
-| Resource | Endpoints |
-| --- | --- |
-| Topics | `/api/topics` |
-| Sub-topics | `/api/sub-topics` |
-| Laws | `/api/laws` |
-| Paragraphs | `/api/paragraphs` |
+| Resource           | Endpoints                 |
+| ------------------ | ------------------------- |
+| Topics             | `/api/topics`             |
+| Sub-topics         | `/api/sub-topics`         |
+| Laws               | `/api/laws`               |
+| Paragraphs         | `/api/paragraphs`         |
 | Paragraph versions | `/api/paragraph-versions` |
-| Import jobs | `/api/import-jobs` |
+| Import jobs        | `/api/import-jobs`        |
 
 Each resource provides `GET`, `GET /:id`, `POST`, `PATCH /:id`, and `DELETE /:id` endpoints. Import-job endpoints manage records only; they do not execute an importer.
 

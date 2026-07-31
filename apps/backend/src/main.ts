@@ -9,7 +9,9 @@ async function bootstrap(): Promise<void> {
   app.use(helmet());
   app.enableCors({ origin: process.env.FRONTEND_ORIGIN?.split(',') ?? true });
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true, forbidNonWhitelisted: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({ whitelist: true, transform: true, forbidNonWhitelisted: true })
+  );
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('dejo-34a-platform API')
@@ -23,4 +25,3 @@ async function bootstrap(): Promise<void> {
 }
 
 void bootstrap();
-

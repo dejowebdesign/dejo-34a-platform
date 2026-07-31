@@ -6,7 +6,12 @@ import { map } from 'rxjs';
 
 @Component({
   imports: [AsyncPipe, MatCardModule],
-  template: `<section><h1>{{ title$ | async }}</h1><mat-card appearance="outlined"><mat-card-content>Dieser Bereich wird vorbereitet.</mat-card-content></mat-card></section>`,
+  template: `<section>
+    <h1>{{ title$ | async }}</h1>
+    <mat-card appearance="outlined"
+      ><mat-card-content>Dieser Bereich wird vorbereitet.</mat-card-content></mat-card
+    >
+  </section>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaceholderPageComponent {

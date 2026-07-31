@@ -5,11 +5,23 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-interface NavigationItem { label: string; icon: string; route: string; }
+interface NavigationItem {
+  label: string;
+  icon: string;
+  route: string;
+}
 
 @Component({
   selector: 'dejo-root',
-  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,19 +1,28 @@
 import { XMLParser } from 'fast-xml-parser';
-import { ParsedLawDocument, ParsedParagraph } from './types';
+import type { ParsedLawDocument, ParsedParagraph } from './types';
 
 /** Parses the official Gesetze-im-Internet XML structure. HTML is intentionally not parsed here. */
 export class ParserService {
-  private readonly parser = new XMLParser({ ignoreAttributes: false, trimValues: true, parseTagValue: false });
+  private readonly parser = new XMLParser({
+    ignoreAttributes: false,
+    trimValues: true,
+    parseTagValue: false
+  });
 
   parse(xml: string, sourceUrl: string): ParsedLawDocument {
     const document = this.parser.parse(xml) as Record<string, unknown>;
     const normNodes = this.findNodes(document, 'norm');
-    const paragraphs = normNodes.map((node) => this.toParagraph(node)).filter((value): value is ParsedParagraph => value !== null);
+    const paragraphs = normNodes
+      .map((node) => this.toParagraph(node))
+      .filter((value): value is ParsedParagraph => value !== null);
     return {
       sourceUrl,
       version: this.findFirstText(document, ['standangabe', 'stand', 'fassung']) ?? null,
       paragraphs,
-      warnings: paragraphs.length === 0 ? ['No paragraph nodes were found in the official XML document.'] : []
+      warnings:
+        paragraphs.length === 0
+          ? ['No paragraph nodes were found in the official XML document.']
+          : []
     };
   }
 
@@ -52,7 +61,11 @@ export class ParserService {
 
   private collectText(value: unknown): string {
     if (typeof value === 'string' || typeof value === 'number') return String(value);
-    if (Array.isArray(value)) return value.map((item) => this.collectText(item)).filter(Boolean).join('\n');
+    if (Array.isArray(value))
+      return value
+        .map((item) => this.collectText(item))
+        .filter(Boolean)
+        .join('\n');
     if (!value || typeof value !== 'object') return '';
     return Object.entries(value as Record<string, unknown>)
       .filter(([key]) => !key.startsWith('@_'))
@@ -62,7 +75,8 @@ export class ParserService {
   }
 
   private asObjects(value: unknown): Record<string, unknown>[] {
-    return (Array.isArray(value) ? value : [value]).filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object');
+    return (Array.isArray(value) ? value : [value]).filter(
+      (item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object'
+    );
   }
 }
-

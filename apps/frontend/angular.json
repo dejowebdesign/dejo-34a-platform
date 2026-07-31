@@ -19,10 +19,16 @@
           },
           "configurations": { "production": { "outputHashing": "all" } }
         },
-        "serve": { "builder": "@angular/build:dev-server", "configurations": { "production": { "buildTarget": "frontend:build:production" }, "development": { "buildTarget": "frontend:build" } }, "defaultConfiguration": "development" }
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "frontend:build:production" },
+            "development": { "buildTarget": "frontend:build" }
+          },
+          "defaultConfiguration": "development"
+        }
       }
     }
   },
   "cli": { "analytics": false }
 }
-

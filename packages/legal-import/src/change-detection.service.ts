@@ -13,4 +13,3 @@ export class ChangeDetectionService {
     return text.replace(/\r\n/g, '\n').replace(/\s+$/gm, '').trim();
   }
 }
-

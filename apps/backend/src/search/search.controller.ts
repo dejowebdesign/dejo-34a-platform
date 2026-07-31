@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { SearchService } from './search.service';
+import type { SearchService } from './search.service';
 
 class SearchQueryDto {
   @IsString()
@@ -17,6 +17,7 @@ export class SearchController {
   @Get()
   @ApiQuery({ name: 'q', minLength: 2, maxLength: 100 })
   @ApiOkResponse({ description: 'Searches legal paragraphs.' })
-  find(@Query() query: SearchQueryDto) { return this.search.find(query.q); }
+  find(@Query() query: SearchQueryDto) {
+    return this.search.find(query.q);
+  }
 }
-

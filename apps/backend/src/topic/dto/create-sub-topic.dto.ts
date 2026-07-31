@@ -22,4 +22,3 @@ export class CreateSubTopicDto {
   @Min(0)
   order!: number;
 }
-

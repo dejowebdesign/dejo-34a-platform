@@ -7,4 +7,3 @@ export class CreateParagraphVersionDto {
   @ApiProperty() @IsString() text!: string;
   @ApiPropertyOptional() @IsOptional() @IsDateString() importedAt?: string;
 }
-

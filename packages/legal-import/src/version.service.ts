@@ -3,4 +3,3 @@ export class VersionService {
     return sourceVersion?.trim() || importedAt.toISOString();
   }
 }
-
