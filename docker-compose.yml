@@ -1,17 +1,19 @@
-version: '3.9'
+version: "3.9"
 
 services:
   postgres:
     image: postgres:17-alpine
     container_name: dejo-postgres
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-dejo34a}
       POSTGRES_USER: ${POSTGRES_USER:-dejo}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
-      interval: 5s
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
       timeout: 5s
       retries: 10
     volumes:
@@ -21,28 +23,36 @@ services:
     image: ghcr.io/dejowebdesign/dejo-34a-backend:latest
     container_name: dejo-backend
     restart: unless-stopped
+    env_file:
+      - .env
     depends_on:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-dejo}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-dejo34a}?schema=public
-      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      JWT_SECRET: ${JWT_SECRET}
       FRONTEND_ORIGIN: http://localhost:8080
       NODE_ENV: production
     command: >
       sh -c "npx prisma migrate deploy --schema database/prisma/schema.prisma &&
              node apps/backend/dist/main.js"
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
 
   frontend:
     image: ghcr.io/dejowebdesign/dejo-34a-frontend:latest
     container_name: dejo-frontend
     restart: unless-stopped
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     ports:
-      - '8080:80'
+      - "8080:80"
 
 volumes:
   postgres_data:
