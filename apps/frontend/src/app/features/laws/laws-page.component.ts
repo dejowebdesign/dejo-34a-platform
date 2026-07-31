@@ -1,4 +1,4 @@
-import type { AfterViewInit} from '@angular/core';
+import type { AfterViewInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';

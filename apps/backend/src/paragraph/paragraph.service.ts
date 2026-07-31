@@ -18,7 +18,14 @@ export class ParagraphService {
     return this.requireParagraph(id);
   }
   create(data: CreateParagraphDto) {
-    return this.prisma.paragraph.create({ data });
+    return this.prisma.paragraph.create({
+      data: {
+        ...data,
+        currentChecksum: '',
+        sourceUrl: '',
+        lastImportedAt: new Date()
+      }
+    });
   }
   async update(id: string, data: UpdateParagraphDto) {
     await this.requireParagraph(id);
@@ -41,7 +48,12 @@ export class ParagraphService {
   }
   createVersion(data: CreateParagraphVersionDto) {
     return this.prisma.paragraphVersion.create({
-      data: { ...data, importedAt: data.importedAt ? new Date(data.importedAt) : undefined }
+      data: {
+        ...data,
+        checksum: '',
+        sourceUrl: '',
+        importedAt: data.importedAt ? new Date(data.importedAt) : new Date()
+      }
     });
   }
   async updateVersion(id: string, data: UpdateParagraphVersionDto) {

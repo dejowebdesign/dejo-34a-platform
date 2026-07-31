@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 import { PlaceholderPageComponent } from './core/placeholder-page.component';
 import { DetailPageComponent } from './features/detail-page.component';
 import { LawsPageComponent } from './features/laws/laws-page.component';
