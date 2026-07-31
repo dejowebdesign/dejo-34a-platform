@@ -1,6 +1,9 @@
+version: '3.9'
+
 services:
   postgres:
     image: postgres:17-alpine
+    container_name: dejo-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-dejo34a}
@@ -13,27 +16,33 @@ services:
       retries: 10
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
   backend:
-    build:
-      context: .
-      dockerfile: docker/backend.Dockerfile
+    image: ghcr.io/dejowebdesign/dejo-34a-backend:latest
+    container_name: dejo-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-dejo}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-dejo34a}?schema=public
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
       FRONTEND_ORIGIN: http://localhost:8080
-    depends_on:
-      postgres:
-        condition: service_healthy
-    command: sh -c "npx prisma migrate deploy --schema database/prisma/schema.prisma && node apps/backend/dist/main.js"
-    restart: unless-stopped
-  frontend:
-    build:
-      context: .
-      dockerfile: docker/frontend.Dockerfile
+      NODE_ENV: production
+    command: >
+      sh -c "npx prisma migrate deploy --schema database/prisma/schema.prisma &&
+             node apps/backend/dist/main.js"
     ports:
-      - '8080:80'
+      - '3000:3000'
+
+  frontend:
+    image: ghcr.io/dejowebdesign/dejo-34a-frontend:latest
+    container_name: dejo-frontend
+    restart: unless-stopped
     depends_on:
       - backend
-    restart: unless-stopped
+    ports:
+      - '8080:80'
+
 volumes:
   postgres_data:
