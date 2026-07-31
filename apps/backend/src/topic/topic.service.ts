@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateSubTopicDto } from './dto/create-sub-topic.dto';
 import type { CreateTopicDto } from './dto/create-topic.dto';
 import type { UpdateSubTopicDto } from './dto/update-sub-topic.dto';

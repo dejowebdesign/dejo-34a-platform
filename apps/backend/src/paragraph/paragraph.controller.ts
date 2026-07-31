@@ -12,7 +12,7 @@ import {
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import type { CreateParagraphDto } from './dto/create-paragraph.dto';
 import type { UpdateParagraphDto } from './dto/update-paragraph.dto';
-import type { ParagraphService } from './paragraph.service';
+import { ParagraphService } from './paragraph.service';
 
 @ApiTags('paragraphs')
 @Controller('paragraphs')

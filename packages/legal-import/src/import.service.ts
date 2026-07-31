@@ -1,5 +1,5 @@
-import type { ChangeDetectionService } from './change-detection.service';
-import type { ParserService } from './parser.service';
+import { ChangeDetectionService } from './change-detection.service';
+import { ParserService } from './parser.service';
 import type { ImportSource, ParsedLawDocument } from './types';
 
 export class ImportService {

@@ -21,7 +21,7 @@ import {
 import type { CreateImportJobDto } from './dto/create-import-job.dto';
 import type { ManualImportDto } from './dto/manual-import.dto';
 import type { UpdateImportJobDto } from './dto/update-import-job.dto';
-import type { ImportService } from './import.service';
+import { ImportService } from './import.service';
 
 @ApiTags('import-jobs')
 @Controller('import-jobs')

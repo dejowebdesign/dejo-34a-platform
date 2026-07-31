@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import type { CreateTopicDto } from './dto/create-topic.dto';
 import type { UpdateTopicDto } from './dto/update-topic.dto';
-import type { TopicService } from './topic.service';
+import { TopicService } from './topic.service';
 
 @ApiTags('topics')
 @Controller('topics')

@@ -12,7 +12,7 @@ import {
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import type { CreateLawDto } from './dto/create-law.dto';
 import type { UpdateLawDto } from './dto/update-law.dto';
-import type { LawService } from './law.service';
+import { LawService } from './law.service';
 
 @ApiTags('laws')
 @Controller('laws')

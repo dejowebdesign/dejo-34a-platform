@@ -12,7 +12,7 @@ import {
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import type { CreateSubTopicDto } from './dto/create-sub-topic.dto';
 import type { UpdateSubTopicDto } from './dto/update-sub-topic.dto';
-import type { TopicService } from './topic.service';
+import { TopicService } from './topic.service';
 
 @ApiTags('sub-topics')
 @Controller('sub-topics')

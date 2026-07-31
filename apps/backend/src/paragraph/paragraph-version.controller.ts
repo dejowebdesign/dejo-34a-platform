@@ -19,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import type { CreateParagraphVersionDto } from './dto/create-paragraph-version.dto';
 import type { UpdateParagraphVersionDto } from './dto/update-paragraph-version.dto';
-import type { ParagraphService } from './paragraph.service';
+import { ParagraphService } from './paragraph.service';
 
 @ApiTags('paragraph-versions')
 @Controller('paragraph-versions')

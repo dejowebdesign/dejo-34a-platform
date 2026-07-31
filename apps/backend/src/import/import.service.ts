@@ -9,7 +9,7 @@ import {
   SchedulerService,
   VersionService
 } from '@dejo/legal-import';
-import type { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateImportJobDto } from './dto/create-import-job.dto';
 import type { ManualImportDto } from './dto/manual-import.dto';
 import type { UpdateImportJobDto } from './dto/update-import-job.dto';

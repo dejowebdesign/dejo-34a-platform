@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import type { QuizService } from './quiz.service';
+import { QuizService } from './quiz.service';
 
 @ApiTags('quizzes')
 @Controller('quizzes')

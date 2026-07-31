@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import type { SearchService } from './search.service';
+import { SearchService } from './search.service';
 
 class SearchQueryDto {
   @IsString()

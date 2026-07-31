@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateParagraphDto } from './dto/create-paragraph.dto';
 import type { CreateParagraphVersionDto } from './dto/create-paragraph-version.dto';
 import type { UpdateParagraphDto } from './dto/update-paragraph.dto';
