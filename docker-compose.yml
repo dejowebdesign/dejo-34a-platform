@@ -33,7 +33,7 @@ services:
       sh -c "npx prisma migrate deploy --schema database/prisma/schema.prisma &&
              node apps/backend/dist/main.js"
     ports:
-      - '3000:3000'
+      - '3020:3000'
 
   frontend:
     image: ghcr.io/dejowebdesign/dejo-34a-frontend:latest
