@@ -44,8 +44,7 @@ services:
     container_name: dejo-frontend
     restart: unless-stopped
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     ports:
       - '8080:80'
 
